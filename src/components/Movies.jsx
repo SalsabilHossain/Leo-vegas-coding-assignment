@@ -1,22 +1,29 @@
-import Movie from './Movie'
-import '../styles/movies.scss'
+import Movie from "./Movie";
+import "../styles/movies.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMoviesInfinite } from "./../data/moviesSlice";
+import { ENDPOINT_DISCOVER } from "./../constants";
 
-const Movies = ({ movies, viewTrailer, closeCard }) => {
+const Movies = ({ viewTrailer }) => {
+  const dispatch = useDispatch();
+  const movies = useSelector((state) => state.movies.movies);
 
-    return (
-        <div data-testid="movies">
-            {movies.movies.results?.map((movie) => {
-                return (
-                    <Movie 
-                        movie={movie} 
-                        key={movie.id}
-                        viewTrailer={viewTrailer}
-                        closeCard={closeCard}
-                    />
-                )
-            })}
-        </div>
-    )
-}
+  const loadMore = () => {
+    dispatch(fetchMoviesInfinite({ apiUrl: ENDPOINT_DISCOVER, page: Math.ceil((movies.results?.length || 0) / 20) + 1 }));
+  };
 
-export default Movies
+  return (
+    <div data-testid="movies" className="movies-container">
+      {movies.results?.map((movie) => (
+        <Movie
+          movie={movie}
+          key={movie.id}
+          viewTrailer={viewTrailer}
+        />
+      ))}
+      <button className="btn btn-light btn-show-more" onClick={loadMore}>Load More</button>
+    </div>
+  );
+};
+
+export default Movies;
