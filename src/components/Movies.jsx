@@ -28,7 +28,7 @@ const Movies = ({ viewTrailer, search }) => {
           No matching movies found or the list is empty.
         </div>
       )}
-      {movies.results?.length > 0 && (
+      {movies.results?.length > 0 && !search && (
         <button
           className="btn btn-light btn-show-more"
           onClick={loadMore}

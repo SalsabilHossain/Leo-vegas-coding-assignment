@@ -78,12 +78,6 @@ it("Resize window and view movie and close movie", async () => {
 
   await userEvent.click(close);
 
-  const loadMore = screen.getAllByTestId("load-more")[0];
-  await waitFor(() => {
-    expect(loadMore).toBeInTheDocument();
-  });
-  await userEvent.click(loadMore);
-
 });
 
 it("Visit starred movie page and remove all starred movies", async () => {
@@ -140,7 +134,6 @@ it('Search for movies and watch trailer and close the modal', async () => {
   renderWithProviders(<App />);
   await userEvent.type(screen.getByTestId('search-movies'), 'forrest gump');
   
-
   const viewTrailerBtn = screen.getAllByText('View Trailer')[0];
   await userEvent.click(viewTrailerBtn);
   
@@ -154,4 +147,11 @@ it('Search for movies and watch trailer and close the modal', async () => {
   });
 
   await userEvent.click(closeTrailerButton);
+});
+
+it("Clicks the load More button to load more movies", async () => {
+  renderWithProviders(<App />);
+  let loadMore = await waitFor(() => screen.findByTestId("load-more"));
+  expect(loadMore).toBeInTheDocument();
+  await userEvent.click(loadMore);
 });

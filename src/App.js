@@ -41,8 +41,6 @@ const App = () => {
     if (query) {
       setSearchParams(createSearchParams({ search: query }));
       dispatch(fetchMovies(`${ENDPOINT_SEARCH}&query=` + query));
-    } else {
-      setSearchParams({});
     }
     setLoading(false);
   };
@@ -106,7 +104,13 @@ const App = () => {
         <Routes>
           <Route
             path="/"
-            element={<Movies movies={movies} viewTrailer={viewTrailer} search={searchQuery} />}
+            element={
+              <Movies
+                movies={movies}
+                viewTrailer={viewTrailer}
+                search={searchQuery}
+              />
+            }
           />
           <Route
             path="/starred"

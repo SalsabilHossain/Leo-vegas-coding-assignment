@@ -14,3 +14,21 @@ export const moviesMock = [
         'title': 'Interstellar'
     }
 ]
+
+export const infiniteMoviesMock = {
+    results: [ { 
+        'id': '27207',
+        'overview': 'In Spiderverse...',
+        'poster_path': '/8IB2e4r4oVhHnANbnm7O3Tj6tF8.jpg',
+        'release_date': '2010-07-5',
+        'title': 'Spider-Man'
+    },
+    { 
+        'id': '157338',
+        'overview': 'Adventures of Deadpool...',
+        'poster_path': '',
+        'release_date': '2014-11-25',
+        'title': 'Deadpool'
+    }]
+   
+}
