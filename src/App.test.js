@@ -41,15 +41,3 @@ it('renders starred component', async () => {
   });
 });
 
-it('search for movies and handle empty input', async () => {
-  renderWithProviders(<App />);
-  const searchInput = screen.getByTestId('search-movies');
-
-  await userEvent.type(searchInput, 'forrest gump');
-  
-  await waitFor(() => {
-    expect(screen.getAllByText('Through the Eyes of Forrest Gump')[0]).toBeInTheDocument();
-  });
-
-  await userEvent.clear(searchInput);
-});

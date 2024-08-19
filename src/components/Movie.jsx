@@ -4,9 +4,9 @@ import watchLaterSlice from '../data/watchLaterSlice'
 import placeholder from '../assets/not-found-500X750.jpeg'
 
 const Movie = ({ movie, viewTrailer }) => {
+    const starred = useSelector((state) => state.starred);
+    const watchLater = useSelector((state) => state.watchLater)
 
-    const state = useSelector((state) => state)
-    const { starred, watchLater } = state
     const { starMovie, unstarMovie } = starredSlice.actions
     const { addToWatchLater, removeFromWatchLater } = watchLaterSlice.actions
 
@@ -21,7 +21,7 @@ const Movie = ({ movie, viewTrailer }) => {
 
     return (
         <div className="wrapper col-3 col-sm-4 col-md-3 col-lg-3 col-xl-2">
-        <div className="card" onClick={(e) => e.currentTarget.classList.add('opened')} >
+        <div className="card" onClick={(e) => e.currentTarget.classList.add('opened')} data-testid="card">
             <div className="card-body text-center">
                 <div className="overlay" />
                 <div className="info_panel">

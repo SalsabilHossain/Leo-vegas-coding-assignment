@@ -9,7 +9,7 @@ const Header = ({ searchMovies }) => {
 
   return (
     <header>
-      <Link to="/" data-testid="home" onClick={() => searchMovies('')}>
+      <Link to="/" data-testid="home" >
         <i className="bi bi-film" />
       </Link>
 
@@ -24,13 +24,13 @@ const Header = ({ searchMovies }) => {
             <i className="bi bi-star" />
           )}
         </NavLink>
-        <NavLink to="/watch-later" className="nav-fav">
+        <NavLink to="/watch-later" className="nav-fav" data-testid="nav-watch-later">
           watch later
         </NavLink>
       </nav>
 
       <div className="input-group rounded">
-        <Link to="/" onClick={(e) => searchMovies('')} className="search-link" >
+        <Link to="/" className="search-link" >
           <input type="search" data-testid="search-movies"
             onKeyUp={(e) => searchMovies(e.target.value)} 
             className="form-control rounded" 

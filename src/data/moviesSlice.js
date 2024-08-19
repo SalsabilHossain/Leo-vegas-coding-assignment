@@ -20,18 +20,10 @@ const moviesSlice = createSlice({
     fetchStatus: "",
     currentPage: 1,
   },
-  reducers: {
-    resetMovies: (state) => {
-      state.movies = [];
-      state.currentPage = 1;
-      state.fetchStatus = "";
-    },
-  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchMovies.fulfilled, (state, action) => {
         state.movies = action.payload;
-
         state.fetchStatus = "success";
       })
       .addCase(fetchMoviesInfinite.fulfilled, (state, action) => {

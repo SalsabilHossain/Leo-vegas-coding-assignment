@@ -6,8 +6,7 @@ import '../styles/starred.scss'
 
 const Starred = ({viewTrailer}) => {
 
-    const state = useSelector((state) => state)
-    const { starred } = state
+    const starred = useSelector((state) => state.starred)
     const { clearAllStarred } = starredSlice.actions
     const dispatch = useDispatch()
 
@@ -26,7 +25,7 @@ const Starred = ({viewTrailer}) => {
         </div>
 
         <footer className="text-center">
-          <button className="btn btn-primary" onClick={() => dispatch(clearAllStarred())}>Remove all starred</button>
+          <button className="btn btn-primary" onClick={() => dispatch(clearAllStarred())} data-testid="clear-starred">Remove all starred</button>
         </footer>
       </div>)}
 

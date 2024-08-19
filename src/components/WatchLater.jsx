@@ -6,8 +6,7 @@ import '../styles/starred.scss'
 
 const WatchLater = ({viewTrailer}) => {
 
-    const state = useSelector((state) => state)
-    const { watchLater } = state
+    const watchLater = useSelector((state) => state.watchLater)
     const { remveAllWatchLater } = watchLaterSlice.actions
     const dispatch = useDispatch()
 
@@ -26,7 +25,7 @@ const WatchLater = ({viewTrailer}) => {
         </div>
 
         <footer className="text-center">
-          <button className="btn btn-primary" onClick={() => dispatch(remveAllWatchLater())}>Empty list</button>
+          <button className="btn btn-primary" onClick={() => dispatch(remveAllWatchLater())} data-testid="clear-all-watch-later">Empty list</button>
         </footer>
       </div>)}
 

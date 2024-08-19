@@ -25,8 +25,9 @@ import { debounce } from "./utils/debounce";
 import "./styles/loader.scss";
 
 const App = () => {
-  const state = useSelector((state) => state);
-  const { movies } = state;
+  const movies = useSelector((state) => {
+    return state.movies;
+  });
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams("");
   const searchQuery = searchParams.get("search");
@@ -37,13 +38,11 @@ const App = () => {
 
   const getSearchResults = async (query) => {
     setLoading(true);
-    dispatch(resetMovies());
     if (query) {
       setSearchParams(createSearchParams({ search: query }));
       dispatch(fetchMovies(`${ENDPOINT_SEARCH}&query=` + query));
     } else {
       setSearchParams({});
-      dispatch(fetchMovies(ENDPOINT_DISCOVER));
     }
     setLoading(false);
   };
@@ -53,7 +52,7 @@ const App = () => {
       navigate("/");
       getSearchResults(query);
     }, 500),
-    [navigate, searchQuery]
+    [navigate]
   );
 
   const getMovies = async () => {
@@ -88,7 +87,7 @@ const App = () => {
 
   useEffect(() => {
     getMovies();
-  }, []);
+  }, [searchQuery]);
 
   return (
     <div className="App">
@@ -107,7 +106,7 @@ const App = () => {
         <Routes>
           <Route
             path="/"
-            element={<Movies movies={movies} viewTrailer={viewTrailer} />}
+            element={<Movies movies={movies} viewTrailer={viewTrailer} search={searchQuery} />}
           />
           <Route
             path="/starred"

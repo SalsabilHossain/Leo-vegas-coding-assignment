@@ -13,8 +13,8 @@ const YoutubePlayer = ({ videoKey }) => {
     isOpen && (
       <div className="modal">
         <div className="modal-content">
-          <button onClick={closeModal} className="close-button">
-            <i class="bi bi-x"></i>
+          <button onClick={closeModal} className="close-button" data-testid="close-modal-button">
+            <i className="bi bi-x"></i>
           </button>
           {videoKey ? (
             <ReactPlayer
