@@ -3,13 +3,13 @@ import userEvent from "@testing-library/user-event";
 import { renderWithProviders } from "./utils";
 import App from "../App";
 
-jest.mock('react-player', () => require('./react-player-mock'));
+jest.mock("react-player", () => require("./react-player-mock"));
 
 it("movies starred and saved to watch later", async () => {
   renderWithProviders(<App />);
 
   await userEvent.type(screen.getByTestId("search-movies"), "forrest gump");
- 
+
   const starMovieLink = screen.getAllByTestId("starred-link")[0];
   await waitFor(() => {
     expect(starMovieLink).toBeInTheDocument();
@@ -35,7 +35,7 @@ it("movies starred and saved to watch later", async () => {
   await userEvent.click(screen.getAllByTestId("remove-watch-later")[0]);
 
   await userEvent.type(screen.getByTestId("search-movies"), "forrest gump");
- 
+
   const unstarMovieLink = screen.getAllByTestId("unstar-link")[0];
   await waitFor(() => {
     expect(unstarMovieLink).toBeInTheDocument();
@@ -51,7 +51,6 @@ it("click home", async () => {
     expect(home).toBeInTheDocument();
   });
   await userEvent.click(home);
-
 });
 
 it("Resize window and view movie and close movie", async () => {
@@ -77,7 +76,6 @@ it("Resize window and view movie and close movie", async () => {
   const close = screen.getAllByTestId("close")[0];
 
   await userEvent.click(close);
-
 });
 
 it("Visit starred movie page and remove all starred movies", async () => {
@@ -129,16 +127,15 @@ it("Visit watch later movie page and remove all watch later movies", async () =>
   await userEvent.click(clearstarMoviePage);
 });
 
-
-it('Search for movies and watch trailer and close the modal', async () => {
+it("Search for movies and watch trailer and close the modal", async () => {
   renderWithProviders(<App />);
-  await userEvent.type(screen.getByTestId('search-movies'), 'forrest gump');
-  
-  const viewTrailerBtn = screen.getAllByText('View Trailer')[0];
+  await userEvent.type(screen.getByTestId("search-movies"), "forrest gump");
+
+  const viewTrailerBtn = screen.getAllByText("View Trailer")[0];
   await userEvent.click(viewTrailerBtn);
-  
+
   await waitFor(() => {
-    expect(screen.getByTestId('mock-player')).toBeInTheDocument();
+    expect(screen.getByTestId("mock-player")).toBeInTheDocument();
   });
 
   const closeTrailerButton = screen.getAllByTestId("close-modal-button")[0];
@@ -154,4 +151,23 @@ it("Clicks the load More button to load more movies", async () => {
   let loadMore = await waitFor(() => screen.findByTestId("load-more"));
   expect(loadMore).toBeInTheDocument();
   await userEvent.click(loadMore);
+});
+
+it("Star and unstar movie", async () => {
+  renderWithProviders(<App />);
+
+  await userEvent.type(screen.getByTestId("search-movies"), "forrest gump");
+
+  const starMovieLink = screen.getAllByTestId("starred-link")[0];
+  await waitFor(() => {
+    expect(starMovieLink).toBeInTheDocument();
+  });
+  await userEvent.click(starMovieLink);
+  await waitFor(() => {
+    expect(screen.getByTestId("star-fill")).toBeInTheDocument();
+  });
+
+  const unstarMovieLink = screen.getAllByTestId("starred-link")[0];
+
+  await userEvent.click(unstarMovieLink);
 });

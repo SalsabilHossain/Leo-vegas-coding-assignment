@@ -26,7 +26,7 @@ export const infiniteMoviesMock = {
     { 
         'id': '157338',
         'overview': 'Adventures of Deadpool...',
-        'poster_path': '',
+        'poster_path': null,
         'release_date': '2014-11-25',
         'title': 'Deadpool'
     }]
